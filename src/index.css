@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    height: 100%;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  body {
+    font-family: 'IBM Plex Mono', monospace;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  input,
+  textarea,
+  button {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: max(0px, env(safe-area-inset-left));
+      padding-right: max(0px, env(safe-area-inset-right));
+      padding-top: max(0px, env(safe-area-inset-top));
+      padding-bottom: max(0px, env(safe-area-inset-bottom));
+    }
+  }
+}
+
+@layer utilities {
+  .heading-serif {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  .text-mono {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400;
+  }
+
+  .task-completing {
+    animation: strikethrough 0.8s ease-out forwards;
+    position: relative;
+  }
+
+  @keyframes strikethrough {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+      text-decoration: line-through;
+    }
+    100% {
+      opacity: 0;
+      text-decoration: line-through;
+    }
+  }
+
+  .task-completing::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #1A1A1A;
+    animation: drawLine 0.6s ease-out forwards;
+  }
+
+  @keyframes drawLine {
+    to {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .heading-serif {
+      font-size: 1.875rem;
+      line-height: 1.2;
+    }
+
+    body {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .heading-serif {
+      font-size: 1.5rem;
+      line-height: 1.1;
+    }
+
+    body {
+      font-size: 13px;
+    }
+  }
+}
