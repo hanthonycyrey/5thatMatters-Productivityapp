@@ -4,12 +4,12 @@ import { TaskClassificationModal } from './components/TaskClassificationModal';
 import { TaskDump } from './components/TaskDump';
 import { ProgressTracker } from './components/ProgressTracker';
 import { Check, Plus, ChevronDown } from 'lucide-react';
+import { DURATION_LABELS } from './lib/taskUtils';
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [focusMode, setFocusMode] = useState(false);
-  const [showWaitingRoom, setShowWaitingRoom] = useState(false);
   const [showGraveyard, setShowGraveyard] = useState(false);
   const [completingTaskId, setCompletingTaskId] = useState<string | null>(null);
   const [collapsedTasks, setCollapsedTasks] = useState<Set<string>>(new Set());
@@ -292,6 +292,9 @@ function App() {
                       80/20
                     </span>
                   )}
+                  <span className="text-mono text-xs text-[#666] bg-[#e8e8e8] px-2 py-1">
+                    {DURATION_LABELS[theFrog.estimated_duration]}
+                  </span>
                 </div>
                 <div className="flex flex-wrap gap-2 w-full sm:w-auto">
                   <button
@@ -358,6 +361,9 @@ function App() {
                               80/20
                             </span>
                           )}
+                          <span className="text-mono text-xs text-[#666] bg-[#e8e8e8] px-2 py-1">
+                            {DURATION_LABELS[task.estimated_duration]}
+                          </span>
                         </div>
                         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full sm:w-auto">
                           <ProgressTracker
@@ -426,35 +432,6 @@ function App() {
           onProgressChange={handleProgressChange}
           onPromote={handlePromoteTask}
         />
-
-        {waitingTasks.length > 0 && (
-          <section className="mb-10 sm:mb-16">
-            <button
-              onClick={() => setShowWaitingRoom(!showWaitingRoom)}
-              className="heading-serif text-2xl sm:text-3xl mb-4 sm:mb-6 hover:opacity-70 transition-opacity w-full text-left"
-            >
-              The Waiting Room ({waitingTasks.length})
-            </button>
-            {showWaitingRoom && (
-              <div className="space-y-2 sm:space-y-3 opacity-60">
-                {waitingTasks.map((task) => (
-                  <div
-                    key={task.id}
-                    className="border-l border-[#1A1A1A] pl-4 py-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4"
-                  >
-                    <p className="text-mono text-xs sm:text-sm flex-1">{task.text}</p>
-                    <button
-                      onClick={() => handlePromoteTask(task.id)}
-                      className="text-mono text-xs ml-0 sm:ml-4 hover:underline active:opacity-75 transition-opacity min-h-[36px] sm:min-h-[auto] flex items-center justify-center w-full sm:w-auto"
-                    >
-                      Promote
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-          </section>
-        )}
 
         {graveyardTasks.length > 0 && (
           <section className="mb-16">
