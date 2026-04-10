@@ -4,7 +4,7 @@ a minimalist productivity app called "5 That Matter" - a task management tool bu
 
 Core Philosophy: The app enforces a maximum of 5 active tasks at any time (Buffett 25/5). Before a task enters the active list, the user must classify it by importance and urgency (Eisenhower). Only tasks marked as Important can enter the active 5.
 
-Urgent-but-not-Important tasks go to a "Delegate" pile. The active 5 are auto-sorted so the hardest/most impactful task is always shown first (Eat That Frog). All other tasks live in a "Someday / Not Now" graveyard — visually dimmed and inaccessible during focus mode.
+Urgent-but-not-Important tasks go to a "Delegate" pile. The active 5 are auto-sorted so the hardest/most impactful task is always shown first (Eat That Frog). All other tasks live in a "Someday / Not Now" graveyard visually dimmed and inaccessible during focus mode.
 
 App Structure & UI Zones:
 1. The Frog - The single top task (highlighted, prominent). This is your #1 today. Do this first.
@@ -19,6 +19,17 @@ Interactions & Rules:
 * Active 5 is hard-capped. The app refuses to add a 6th task without archiving one.
 * Tasks can be tagged with an 80/20 flag - a small marker that asks: "Will this drive the majority of your results today?" Flagged tasks rise to the top.
 * Completing "The Frog" triggers a subtle, satisfying animation and promotes the next task up.
+
+* Visual Design:
+* Aesthetic: Brutally minimal, editorial, monochrome-first - think a printed Moleskine page meets a Bloomberg terminal. No gradients, no rounded cards, no color noise.
+* Color palette: Off-white or warm cream background (`#F5F0E8`), near-black text (`#1A1A1A`), single accent color used sparingly (deep forest green `#2D5016` or burnt sienna `#C4622D` - pick one, use it only for "The Frog" highlight and CTAs).
+* Typography: Tall serif for headings (like Playfair Display or DM Serif Display), clean monospace for task text (like IBM Plex Mono or Roboto Mono) — creates an intentional tension between editorial and functional.
+* No icons except one: a small frog `🐸` emoji next to task #1. Nothing else decorative.
+* Layout: Single-column, left-aligned, generous line-height. The interface should feel like a document, not an app.
+* Micro-animations: Task completion should feel like crossing something off a physical list - a slow strikethrough line animation, then a fade-out.
+* Focus Mode: A full-screen toggle that hides everything except The Frog - just the task text and a "Done" button. Distraction-free.
+Tech stack: React with hooks (useState, useReducer), localStorage for persistence, Tailwind for layout only, custom CSS for typography and animations. No backend needed. Single-file component preferred.
+Tone of the app: The copy should feel like a strict but wise mentor. Use phrases like "What must get done today?", "You've already decided. Start.", "Not now means not ever - are you sure?"
 
 a vibe code mobile app from bolt.
 
